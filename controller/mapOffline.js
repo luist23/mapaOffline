@@ -18,7 +18,7 @@
     }
 
     async function doWork() {
-        console.log("in doWork init");
+        //console.log("in doWork init");
         defineFullMap()
         console.log("mapa definido")
         progress = 0
@@ -37,7 +37,7 @@
                 while (initialvalue < listPoints[flagList + 1].y){
                     corrutines.push(downloadPart(i, k, initialvalue, initialvalue + divide))
                         //progress += await 
-                        console.log("progreso", progress);
+                    //console.log("progreso", progress);
                     initialvalue += divide
                     if (exception != null){
                         console.log("descarga mapa","fallo por inter")
@@ -63,7 +63,7 @@
         var flag = 0;
         for (j=a; a<=b; a++) {
             let exceptione = await downloadTileImage(i, j, k);
-            sleep(1000)
+            //await sleep(1000)
             if (exceptione != null) {
                 exception = exceptione
                 console.log("descarga mapa","fallo por inter")
@@ -111,23 +111,30 @@
     const fs = require('fs');
 
     async function downloadTileImage(x, y, zoom) {
-        console.log("donwload tile", `progreso: ${progress}, fallas: ${fallas}, total: ${total}`)
-        //let name = getTileFileDir(x, zoom) + `${y}.png`
-        //console.log("nombre de archivo", name);
+        //console.log("donwload tile", `progreso: ${progress}, fallas: ${fallas}, total: ${total}`)
+        let name = getTileFileDir(x, zoom) + `${y}.png`
+        console.log("nombre de archivo", name);
         try {
-            console.log("prede-verifique file")
+            //console.log("prede-verifique file")
             try {
-                if (fs.accessSync(getTileFileDir, `${y}.png`)) {
-                    console.log(`${urls} Tile Exist!!`);
+                if (fs.existsSync(name)) {
+                    console.log(`${getTileFileDir2(x, zoom) + `${y}.png`} Tile Exist!!`);
                     return null
+                } else{
+                    let urls =`https://a.tile.openstreetmap.org/${zoom}/${x}/${y}.png`;
+                    //console.log("pre download")
+                    await imagenDownload(urls, getTileFileDir(x, zoom), `${y}.png`, ()=>{
+                        console.log(`${urls} Tile download!!`);
+                    })
+                //await sleep(1000)
                 }
             } catch (error) {
                 let urls =`https://a.tile.openstreetmap.org/${zoom}/${x}/${y}.png`;
-                console.log("pre download")
-                await imagenDownload(urls, getTileFileDir(x, zoom), `${y}.png`, ()=>{
+                console.log("pre download", error)
+                /*await imagenDownload(urls, getTileFileDir(x, zoom), `${y}.png`, ()=>{
                     console.log(`${urls} Tile download!!`);
-                })
-                sleep(1000)
+                })*/
+                //sleep(1000)
             }
         } catch (e) {
             //console.log("tileP", "outmemory", e)
@@ -138,6 +145,9 @@
 
     function getTileFileDir(x, zoom) {
         return `${filesDir}map\\${zoom}\\${x}\\`
+    }
+    function getTileFileDir2(x, zoom) {
+        return `/map/${zoom}/${x}/`
     }
 
     function sleep(ms) {
