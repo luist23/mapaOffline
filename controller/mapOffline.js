@@ -130,8 +130,8 @@
                 sleep(1000)
             }
         } catch (e) {
-            console.log("tileP", "outmemory", e)
-            e.printStackTrace()
+            //console.log("tileP", "outmemory", e)
+            return e
         }
         return null
     }
