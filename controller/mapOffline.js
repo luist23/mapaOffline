@@ -54,6 +54,7 @@ async function processMap(){
 
 async function downloadPart(i, k, a, b) {
     var flag = 0;
+    const totalint = b-a
     for (j = a; j <= b; j++) {
         let exceptione = await downloadTileImage(i, j, k);
         if (exceptione != null) {
@@ -61,6 +62,7 @@ async function downloadPart(i, k, a, b) {
             break
         }
         flag++
+        console.log(`de ${a} a ${b}.  ${flag}/${totalint}`)
     }
     progress += flag
 }
