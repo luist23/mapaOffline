@@ -5,9 +5,7 @@ let total = 0
 var listPoints = new Array
 const mLimit = 19
 const nLimit = 19
-const round = 0.05
 let progress = 0
-let data = null
 let fallas = 0
 
 class Point {
