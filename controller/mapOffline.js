@@ -34,15 +34,18 @@ async function processMap(){
                 divide = 1
             }
             var initialvalue = listPoints[flagList].y
+            var threads = new Array
             while (initialvalue < listPoints[flagList + 1].y) {
-                await downloadPart(i, k, initialvalue, initialvalue + divide);
-                progress ++
+                threads.push(downloadPart(i, k, initialvalue, initialvalue + divide))
+                //await downloadPart(i, k, initialvalue, initialvalue + divide);
+                //progress ++
                 if (progress % 200 === 0) {
                     // for it to print every 200 images instead of 1 every image
                     console.log(`progreso: ${progress}, fallas: ${fallas}, total: ${total}`)
                 }
                 initialvalue += divide
             } 
+            await threads[0]
         }
         flagList += 2
     }
@@ -59,6 +62,7 @@ async function downloadPart(i, k, a, b) {
         }
         flag++
     }
+    progress += flag
 }
 
 function defineFullMap() {
