@@ -4,8 +4,8 @@ const tiles = require('../controller/mapOffline')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  tiles.doWork()
   res.render('index', { title: 'Express' });
+  tiles.doWork()
 });
 
 module.exports = router;
