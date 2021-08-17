@@ -17,6 +17,13 @@ class Point {
 
 async function doWork() {
     defineFullMap()
+    console.log("to preocess");
+    console.log("poinst", listPoints)
+    processMap()
+    
+}
+
+async function processMap(){
     var flagList = 0
     for (k = nLimit; k <= mLimit; k++) {
         for (i = listPoints[flagList].x; i <= listPoints[flagList + 1].x; i++) {
@@ -44,7 +51,7 @@ async function doWork() {
 
 async function downloadPart(i, k, a, b) {
     var flag = 0;
-    for (j = a; a <= b; a++) {
+    for (j = a; j <= b; j++) {
         let exceptione = await downloadTileImage(i, j, k);
         if (exceptione != null) {
             fallas++;

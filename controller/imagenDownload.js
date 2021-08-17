@@ -5,7 +5,7 @@ var mkdirp = require('mkdirp');
 const shell = require('shelljs')
 
 var download = async (uri,dir, filename, callback) => {
-    //console.log("in download");
+    console.log("in download", uri);
     shell.mkdir('-p',dir)
     const path = Path.resolve(dir, filename)
     const writer = Fs.createWriteStream(path)
@@ -21,10 +21,10 @@ var download = async (uri,dir, filename, callback) => {
 
     response.data.pipe(writer)
 
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
         writer.on('finish', resolve)
         writer.on('error', reject)
-    })
+    })*/
 
 };
 
