@@ -1,7 +1,6 @@
 const Fs = require('fs');
 const axios = require('axios');
 const Path = require('path')
-var mkdirp = require('mkdirp');
 const shell = require('shelljs')
 
 var download = async (uri,dir, filename, callback) => {
