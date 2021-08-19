@@ -14,12 +14,12 @@ let total = 0
 var descargando = 0;
 var existencia = 0;
 var listPoints = [];
-const mLimit = 16
-const nLimit = 16
+const mLimit = 12
+const nLimit = 18
 let progress = 0
 let fallas = 0
 let punto = new DepartmentMap(-90.0, 14.0, "libertad")
-const limite = 0.01
+const limite = 0.05
 
 class Point {
     constructor(x, y) {
