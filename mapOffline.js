@@ -5,7 +5,7 @@ let total = 0
 var descargando = 0;
 var existencia = 0;
 var listPoints = [];
-const mLimit = 19;
+const mLimit = 16;
 const nLimit = mLimit;
 let progress = 0
 let fallas = 0
@@ -29,22 +29,7 @@ async function processMap() {
   var flagList = 0
   for (k = nLimit; k <= mLimit; k++) {
     for (i = listPoints[flagList].x; i <= listPoints[flagList + 1].x; i++) {
-      var divide = listPoints[flagList + 1].y - listPoints[flagList].y
-      divide /= 10
-      divide = Math.trunc(divide)
-      if (divide === 0) {
-        divide = 1;
-      }
-      let initialvalue = listPoints[flagList].y
-      while (initialvalue < listPoints[flagList + 1].y) {
-        if (initialvalue + divide > listPoints[flagList + 1].y) {
-          await downloadPart(i, k, initialvalue, listPoints[flagList + 1].y);
-        } else {
-          await downloadPart(i, k, initialvalue, initialvalue + divide);
-        }
-        initialvalue += divide;
-      }
-
+      await downloadPart(i, k, listPoints[flagList].y, listPoints[flagList + 1].y);
     }
     flagList += 2;
   }
@@ -71,10 +56,10 @@ function defineFullMap() {
   let flag = 0;
   for (i = mLimit; i <= nLimit; i++) {
     latTemp = 14.4179;
-    longTemp = -90.0; // -88.1397//-89.1397 //-90.1397//
+    longTemp = -90.1397; // -88.1397//-89.1397 //-90.1397//
     listPoints.push(new Point(getXm(longTemp, i), getYm(latTemp, i)))
     latTemp = 13.14;
-    longTemp = -89.0; //-87.7112//-88.1397//-87.7112
+    longTemp = -87.7112; //-87.7112//-88.1397//-87.7112
     listPoints.push(new Point(getXm(longTemp, i), getYm(latTemp, i)))
     total +=
       (listPoints[flag].x - listPoints[flag + 1].x) * (listPoints[flag].y - listPoints[flag + 1].y)
