@@ -90,7 +90,7 @@ function getXm(longitude, i) {
 function getYm(latitude, i) {
   return Math.floor(
     (1 - Math.log(
-        ((latitude) * Math.PI / 180)
+        Math.tan((latitude) * Math.PI / 180)
         + (1 / Math.cos((latitude * Math.PI / 180)))
       ) / Math.PI
     ) * (2 ** (i - 1))
