@@ -26,7 +26,7 @@ async function doWork() {
 }
 
 async function processMap() {
-  var flagList = 0
+  let flagList = 0
   for (k = nLimit; k <= mLimit; k++) {
     for (i = listPoints[flagList].x; i <= listPoints[flagList + 1].x; i++) {
       await downloadPart(i, k, listPoints[flagList].y, listPoints[flagList + 1].y);
@@ -36,18 +36,18 @@ async function processMap() {
 }
 
 async function downloadPart(i, k, a, b) {
-  var flag = 0;
-  const totalint = b - a
+  //let flag = 0;
+  //const totalint = b - a
   for (j = a; j <= b; j++) {
     let exceptione = await downloadTileImage(i, j, k);
     if (exceptione != null) {
       fallas++;
-      break;
+      //break;
     }
-    flag++
-    console.log(`zoom ${nLimit}  ${flag}/${totalint}. fallas ${fallas}. progreso ${progress}/${total}, existen: ${existencia}, descarga ${descargando}`)
+    progress++
+    console.log(`zoom ${nLimit} fallas ${fallas}. progreso ${progress}/${total}, existen: ${existencia}, descarga ${descargando}`)
   }
-  progress += flag
+  //progress += flag
 }
 
 function defineFullMap() {
@@ -90,9 +90,7 @@ async function downloadTileImage(x, y, zoom) {
     } else {
       descargando++;
       let urls = `https://a.tile.openstreetmap.org/${zoom}/${x}/${y}.png`;
-      await imagenDownload(urls, getTileFileDir(x, zoom), `${y}.png`, () => {
-        console.log(`Tile download: ${urls}`);
-      })
+      await imagenDownload(urls, getTileFileDir(x, zoom), `${y}.png`)
     }
     return null;
   } catch (e) {
