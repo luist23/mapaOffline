@@ -1,6 +1,6 @@
 const imagenDownload = require('./imagenDownload').download
 const fs = require('fs');
-const filesDir = __dirname + '\\'
+const filesDir = __dirname + '/'
 let total = 0
 var descargando = 0;
 var existencia = 0;
@@ -99,7 +99,7 @@ async function downloadTileImage(x, y, zoom) {
 }
 
 function getTileFileDir(x, zoom) {
-  return `${filesDir}map\\${zoom}\\${x}\\`
+  return `${filesDir}map/${zoom}/${x}/`
 }
 
 module.exports = {doWork};
