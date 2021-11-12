@@ -18,7 +18,7 @@ class Point {
 }
 
 async function doWork() {
-  defineFullMap()
+  defineFullMap(-90.1397, -87.7112, 13.14, 14.4179);
   console.log("to preocess");
   console.log("poinst", listPoints)
   console.log("total", total)
@@ -50,16 +50,16 @@ async function downloadPart(i, k, a, b) {
   //progress += flag
 }
 
-function defineFullMap() {
+function defineFullMap(xmin, xmax, ymin, ymax) {
   let latTemp = null;
   let longTemp = null;
   let flag = 0;
   for (i = mLimit; i <= nLimit; i++) {
-    latTemp = 14.4179;
-    longTemp = -90.1397; // -88.1397//-89.1397 //-90.1397//
+    latTemp = ymax;
+    longTemp = xmin
     listPoints.push(new Point(getXm(longTemp, i), getYm(latTemp, i)))
-    latTemp = 13.14;
-    longTemp = -87.7112; //-87.7112//-88.1397//-87.7112
+    latTemp = ymin;
+    longTemp = xmax;
     listPoints.push(new Point(getXm(longTemp, i), getYm(latTemp, i)))
     total +=
       (listPoints[flag].x - listPoints[flag + 1].x) * (listPoints[flag].y - listPoints[flag + 1].y)
