@@ -5,10 +5,11 @@ let total = 0
 var descargando = 0;
 var existencia = 0;
 var listPoints = [];
-const mLimit = 16;
+const mLimit = 13;
 const nLimit = mLimit;
 let progress = 0
 let fallas = 0
+const redondeocoordenada = 0.05
 
 class Point {
   constructor(x, y) {
@@ -17,8 +18,13 @@ class Point {
   }
 }
 
+function redonderaCoordenadaCentral(x , y) {
+  defineFullMap(x - redondeocoordenada, x + redondeocoordenada, y - redondeocoordenada, y + redondeocoordenada);
+}
+
 async function doWork() {
-  defineFullMap(-90.1397, -87.7112, 13.14, 14.4179);
+  //defineFullMap(-90.1397, -87.7112, 13.14, 14.4179);
+  redonderaCoordenadaCentral(-89.18393148768999, 13.664445599414368);
   console.log("to preocess");
   console.log("poinst", listPoints)
   console.log("total", total)
